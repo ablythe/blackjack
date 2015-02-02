@@ -2,11 +2,12 @@ class Card
   def initialize value, suit
     @value = value
     @suit = suit
+    @identity = value
   end
   def value
     case @value
     when :A 
-      @value = 1
+      @value = 11
     when :K
       @value = 10
     when :Q
@@ -17,6 +18,8 @@ class Card
       @value = @value
     end
   end
+
+  attr_reader :identity
 
   attr_reader :suit
 end
