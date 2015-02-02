@@ -14,9 +14,8 @@ class Card
     when :J
       @value = 10
     else
-      @value = value
+      @value = @value
     end
-    @value
   end
 
   attr_reader :suit

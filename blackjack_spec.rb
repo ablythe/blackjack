@@ -31,8 +31,6 @@ class TestDeck < Minitest::Test
   def test_counting_draws
     deck = Deck.new
     deck.draw
-    require 'pry'
-    binding.pry
     assert_equal deck.cards.count, 51
   end
 
