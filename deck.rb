@@ -2,6 +2,7 @@ class Deck
   def initialize
     @cards = []
     @suits = [:H, :S, :D, :C]
+    @drawn_cards = []
   end
   def build_deck
     @suits.each do |suit|
@@ -20,6 +21,12 @@ class Deck
   end
 
   def draw
-    @cards =@cards.pop
+    drawn_card =cards.pop
+    @drawn_cards<< drawn_card
+    drawn_card
+  end
+
+  def drawn
+    @drawn_cards
   end
 end
