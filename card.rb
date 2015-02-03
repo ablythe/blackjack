@@ -2,7 +2,7 @@ class Card
   def initialize value, suit
     @value = value
     @suit = suit
-    @identity = value
+    @identity = [value, suit]
   end
   def value
     case @value

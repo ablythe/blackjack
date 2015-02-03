@@ -3,20 +3,31 @@ class Deck
     @cards = []
     @suits = [:H, :S, :D, :C]
     @drawn_cards = []
+    build_deck
   end
+
   def build_deck
     @suits.each do |suit|
       (1..13).each do |value|
-        @cards << Card.new(value, suit)
+        card_rank = case value
+        when 1
+          :A
+        when 13
+          :K
+        when 12
+          :Q
+        when 11
+          :J
+        else
+          value
+        end
+        @cards << Card.new(card_rank, suit)
       end
     end
     @cards
   end
-    
+
   def cards
-    if @cards.empty?
-      build_deck
-    end
     @cards
   end
 
@@ -28,5 +39,9 @@ class Deck
 
   def drawn
     @drawn_cards
+  end
+
+  def shuffle
+    @cards.shuffle!
   end
 end
