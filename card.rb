@@ -4,22 +4,17 @@ class Card
     @suit = suit
     @identity = [value, suit]
   end
+
+  attr_reader :identity, :suit
+
   def value
-    case @value
+    @value = case @value
     when :A 
-      @value = 11
-    when :K
-      @value = 10
-    when :Q
-      @value = 10
-    when :J
-      @value = 10
+      11
+    when :K, :Q, :J
+      10
     else
-      @value = @value
+      @value
     end
   end
-
-  attr_reader :identity
-
-  attr_reader :suit
 end

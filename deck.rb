@@ -2,10 +2,12 @@ class Deck
   def initialize
     @cards = []
     @suits = [:H, :S, :D, :C]
-    @drawn_cards = []
+    @drawn = []
     build_deck
   end
 
+  attr_reader :cards, :drawn
+  
   def build_deck
     @suits.each do |suit|
       (1..13).each do |value|
@@ -27,18 +29,10 @@ class Deck
     @cards
   end
 
-  def cards
-    @cards
-  end
-
   def draw
     drawn_card =cards.pop
-    @drawn_cards<< drawn_card
+    @drawn<< drawn_card
     drawn_card
-  end
-
-  def drawn
-    @drawn_cards
   end
 
   def shuffle

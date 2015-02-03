@@ -15,6 +15,7 @@ class Hand
       @value += card.value
       if card.value == 11 then @aces += 1 end
     end
+    
     while @aces >0 && @value > 21
       @value -= 10
       @aces -= 1
@@ -49,6 +50,4 @@ class Hand
     end
     display.join(', ')
   end
-
-
 end

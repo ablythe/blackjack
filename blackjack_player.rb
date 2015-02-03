@@ -1,44 +1,55 @@
 require './blackjack'
 
-#Starting game
-deck = Deck.new
-p = Player.new("Alex")
-dealer = Dealer.new("Dealer")
-#shuffling
-deck.shuffle
+puts "Welcome to Blackjack. Press any key to continue."
+gets
 
-#Dealing
+puts "Enter player name:"
+name = gets.chomp
+
+puts
+deck = Deck.new
+p = Player.new(name)
+dealer = Dealer.new("Dealer")
+players = [p, dealer]
+puts "Shuffling deck."
+sleep 0.5
+deck.shuffle
+puts
+puts "Dealing Cards."
+sleep 1
+puts
 dealer.starting_deal deck, p, dealer
 puts "#{p.name}'s hand: #{p.hand}, value: #{p.value}"
 puts "Dealer is showing: #{dealer.card_showing 0}, value: #{dealer.hand.hand[0].value}"
 
+scores = {}
+players.each do |player|
+  until player.stay? || player.busted?
+    player.plays deck, dealer
+  end
+  if player.busted? 
+    puts "#{player.name} busted."
+    break
+  end
+  scores[player.name] = player.value
+end
 
-until p.stay? || p.busted?
-  puts "Do you want hit or stay? "
-  play = gets.chomp.downcase
-  if play == "hit"
-    p.hit dealer, deck
-  else p.stay
-  end
-end
-if p.busted? 
-  puts "You Busted." 
+if p.busted?
+  puts "Dealer wins."
+elsif dealer.busted?
+  puts "#{p.name} wins."
 else
-  #Computer plays
-  until dealer.stay? || dealer.busted?
-    dealer.plays deck
-  end 
-  if dealer.busted?
-    puts "Dealer busts. #{p.name} wins!"
-  else
-    winner = if p.value > dealer.value
-      p
-    else
-      dealer
+  winning_score = 0
+  winner = ""
+  scores.each do | name, score|
+    if score > winning_score
+      winning_score = score
+      winner = name
     end
-    puts "#{winner.name} wins."
   end
+  puts "#{winner} wins."
 end
+
 
 
 
