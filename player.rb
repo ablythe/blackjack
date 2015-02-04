@@ -13,7 +13,11 @@ class Player
   end
 
   def value
-    @hand.value 
+    if @hand.blackjack?
+      "blackjack"  
+    else
+      @hand.value
+    end 
   end
 
   def hit dealer, deck
@@ -38,7 +42,7 @@ class Player
   end
 
   def busted?
-    if value > 21
+    if @hand.value > 21
       @busted = true
     end
     @busted

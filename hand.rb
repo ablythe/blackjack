@@ -4,13 +4,13 @@ class Hand
     @value =0
     @busted = false
     @blackjack = false
-    @aces = 0
   end
 
   attr_reader :hand
   
   def value
     @value = 0
+    @aces =0
     @hand.each do |card|
       @value += card.value
       if card.value == 11 then @aces += 1 end
